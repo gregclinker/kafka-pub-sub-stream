@@ -21,9 +21,8 @@ public class Listener {
     public final CountDownLatch latch1 = new CountDownLatch(1);
 
     @KafkaListener(id = "message", topics = "payments")
-    public void paymentListener(String message) {
-        LOGGER.debug("received message:" + message);
-        final Payment payment = new PaymentFactory().makePayment();
+    public void paymentListener(Payment payment) {
+        LOGGER.debug("received payment:" + payment);
         applicationEventPublisher.publishEvent(new PaymentCreatedEvent(payment));
         this.latch1.countDown();
     }

@@ -8,7 +8,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Payment {
-    private Long id;
+    private Integer id;
     private String account;
     private String sort;
     private Integer amount;

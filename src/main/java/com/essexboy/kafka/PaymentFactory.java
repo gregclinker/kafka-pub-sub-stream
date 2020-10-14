@@ -7,7 +7,7 @@ public class PaymentFactory {
 
     public static Payment makePayment() {
         Payment payment = new Payment();
-        payment.setId(RANDOM.nextLong());
+        payment.setId(RANDOM.nextInt());
         payment.setAccount(RANDOM.nextInt(10000000) + "");
         payment.setSort(RANDOM.nextInt(10) + "-" + RANDOM.nextInt(10) + "-" + RANDOM.nextInt(10));
         payment.setAmount(RANDOM.nextInt());

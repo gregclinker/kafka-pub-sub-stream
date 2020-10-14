@@ -1,5 +1,6 @@
 package com.essexboy.kafka;
 
+import lombok.extern.log4j.Log4j2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,14 @@ public class PaymentService {
     private Listener listener;
 
     @Autowired
-    private KafkaTemplate<Integer, String> template;
+    private KafkaTemplate<Integer, Payment> template;
 
     private Integer id = 0;
 
     public Payment streamTestPayment() {
         try {
             final Payment payment = new PaymentFactory().makePayment();
-            template.send("payments", ++id, payment.toString());
+            template.send("payments", ++id, payment);
             template.flush();
             return payment;
         } catch (Exception e) {

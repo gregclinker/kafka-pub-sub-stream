@@ -17,14 +17,14 @@ class KafkaProdSubApplicationTests {
 	private Listener listener;
 
 	@Autowired
-	private KafkaTemplate<Integer, String> template;
+	private KafkaTemplate<Integer, Payment> template;
 
 	@Autowired
 	private PaymentService paymentService;
 
 	@Test
 	public void testSimple() throws Exception {
-		template.send("payments", new Random().nextInt(), new PaymentFactory().makePayment().toString());
+		template.send("payments", new Random().nextInt(), new PaymentFactory().makePayment());
 		template.flush();
 		assertTrue(listener.latch1.await(10, TimeUnit.SECONDS));
 	}

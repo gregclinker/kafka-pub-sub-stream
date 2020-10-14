@@ -1,1 +1,21 @@
-# kafka-pub-sub-stream
+# api-simulator
+
+Spring Boot application that drops a payment on a Kafka event and consumes it in a reactive stream..
+
+**To Build**
+```shell script
+mvn clean installl
+```
+
+**To Run**
+```shell script
+java -jar target/kafka-prod-sub-0.1.jar
+```
+
+Default config for Kafka is set in the Spring Boot application.properties
+
+```
+kafka.bootstrapServers=localhost:9092
+```
+A quick way to get a complete Kafka & Schema Registry up and running is to [run Confluent locally](https://docs.confluent.io/current/quickstart/ce-quickstart.html)  or [run Confluent with Docker](https://docs.confluent.io/current/quickstart/ce-docker-quickstart.html). This also gives you a nice front end that you can use to see Kafka messages.
+

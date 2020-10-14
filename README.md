@@ -28,6 +28,6 @@ A quick way to get a complete Kafka & Schema Registry up and running is to [run 
 ```
 mvn package -DskipTests com.google.cloud.tools:jib-maven-plugin:build -Dimage=registry.hub.docker.com/gregclinker/kafka-pub-sub-stream:0.1
 
-kubectl create deployment api-simulator --image=registry.hub.docker.com/gregclinker/kafka-pub-sub-stream:0.1
+kubectl create deployment kafka-pub-sub-stream --image=registry.hub.docker.com/gregclinker/kafka-pub-sub-stream:0.1
 kubectl create service loadbalancer kafka-pub-sub-stream --tcp=8080:8080
 ```

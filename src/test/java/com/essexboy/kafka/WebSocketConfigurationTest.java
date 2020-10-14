@@ -3,11 +3,8 @@ package com.essexboy.kafka;
 import lombok.extern.log4j.Log4j2;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.reactivestreams.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.socket.WebSocketMessage;
 import org.springframework.web.reactive.socket.WebSocketSession;
 import org.springframework.web.reactive.socket.client.ReactorNettyWebSocketClient;
@@ -16,17 +13,15 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
-import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Log4j2
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class WebSocketConfigurationTest {
 
+    private final WebSocketClient socketClient = new ReactorNettyWebSocketClient();
     @Autowired
     private PaymentService paymentService;
-
-    private final WebSocketClient socketClient = new ReactorNettyWebSocketClient();
 
     @Test
     public void testNotificationsOnUpdates() throws Exception {

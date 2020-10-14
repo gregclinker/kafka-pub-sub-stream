@@ -1,6 +1,6 @@
 # api-simulator
 
-Spring Boot application that drops a payment on a Kafka event and consumes it in a reactive stream..
+Spring Boot/Web Flux/Kafka application that drops a payment on a Kafka event and consumes it in a reactive stream..
 
 **To Build**
 ```shell script
@@ -19,3 +19,6 @@ kafka.bootstrapServers=localhost:9092
 ```
 A quick way to get a complete Kafka & Schema Registry up and running is to [run Confluent locally](https://docs.confluent.io/current/quickstart/ce-quickstart.html)  or [run Confluent with Docker](https://docs.confluent.io/current/quickstart/ce-docker-quickstart.html). This also gives you a nice front end that you can use to see Kafka messages.
 
+**Publisher** http://localhost:8080/testPayment convienience method to create a test payment and write to a topic
+
+**Consumer Stream** http://localhost:8080/ws.html will consume events as a stream

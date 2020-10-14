@@ -1,6 +1,6 @@
 # api-simulator
 
-Spring Boot application that drops a payment on a Kafka event and consumes it in a reactive stream..
+Spring Boot application that drops a payment on a Kafka event bus and consumes it in a reactive stream..
 
 **To Build**
 ```shell script

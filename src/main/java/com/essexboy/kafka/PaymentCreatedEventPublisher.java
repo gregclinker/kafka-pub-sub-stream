@@ -1,4 +1,4 @@
-package com.essexboy.reactdemo;
+package com.essexboy.kafka;
 
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
@@ -11,27 +11,27 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.function.Consumer;
 
 @Component
-class SentenceCreatedEventPublisher implements ApplicationListener<SentenceCreatedEvent>, Consumer<FluxSink<SentenceCreatedEvent>> {
+class PaymentCreatedEventPublisher implements ApplicationListener<PaymentCreatedEvent>, Consumer<FluxSink<PaymentCreatedEvent>> {
 
     private final Executor executor;
-    private final BlockingQueue<SentenceCreatedEvent> queue =
+    private final BlockingQueue<PaymentCreatedEvent> queue =
             new LinkedBlockingQueue<>();
 
-    SentenceCreatedEventPublisher(Executor executor) {
+    PaymentCreatedEventPublisher(Executor executor) {
         this.executor = executor;
     }
 
     @Override
-    public void onApplicationEvent(SentenceCreatedEvent event) {
+    public void onApplicationEvent(PaymentCreatedEvent event) {
         this.queue.offer(event);
     }
 
     @Override
-    public void accept(FluxSink<SentenceCreatedEvent> sink) {
+    public void accept(FluxSink<PaymentCreatedEvent> sink) {
         this.executor.execute(() -> {
             while (true)
                 try {
-                    SentenceCreatedEvent event = queue.take();
+                    PaymentCreatedEvent event = queue.take();
                     sink.next(event);
                 } catch (InterruptedException e) {
                     ReflectionUtils.rethrowRuntimeException(e);

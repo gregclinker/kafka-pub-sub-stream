@@ -1,4 +1,4 @@
-package com.essexboy.reactdemo;
+package com.essexboy.kafka;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -41,8 +41,8 @@ class WebSocketConfiguration {
     }
 
     @Bean
-    WebSocketHandler webSocketHandler(ObjectMapper objectMapper, SentenceCreatedEventPublisher eventPublisher) {
-        Flux<SentenceCreatedEvent> publish = Flux
+    WebSocketHandler webSocketHandler(ObjectMapper objectMapper, PaymentCreatedEventPublisher eventPublisher) {
+        Flux<PaymentCreatedEvent> publish = Flux
                 .create(eventPublisher)
                 .share();
 

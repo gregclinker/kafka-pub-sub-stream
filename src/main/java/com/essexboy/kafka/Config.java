@@ -6,7 +6,9 @@ import org.apache.kafka.common.serialization.IntegerDeserializer;
 import org.apache.kafka.common.serialization.IntegerSerializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -22,6 +24,9 @@ public class Config {
 
     @Value(value = "${kafka.bootstrapServers}")
     private String bootstrapServers;
+
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
 
     @Bean
     ConcurrentKafkaListenerContainerFactory<Integer, String> kafkaListenerContainerFactory() {
@@ -63,7 +68,7 @@ public class Config {
 
     @Bean
     public Listener listener() {
-        return new Listener();
+        return new Listener(applicationEventPublisher);
     }
 
     @Bean

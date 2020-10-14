@@ -1,9 +1,10 @@
-package com.essexboy.reactdemo;
+package com.essexboy.kafka;
 
 import lombok.extern.log4j.Log4j2;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.reactivestreams.Publisher;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -22,16 +23,10 @@ import java.util.concurrent.atomic.AtomicLong;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class WebSocketConfigurationTest {
 
+    @Autowired
+    private PaymentService paymentService;
 
     private final WebSocketClient socketClient = new ReactorNettyWebSocketClient();
-
-
-    private final WebClient webClient = WebClient.builder().build();
-
-
-    private Sentence generateRandomProfile() {
-        return new Sentence(UUID.randomUUID().toString(), UUID.randomUUID().toString() + "@email.com");
-    }
 
     @Test
     public void testNotificationsOnUpdates() throws Exception {
@@ -40,17 +35,13 @@ class WebSocketConfigurationTest {
         AtomicLong counter = new AtomicLong();
         URI uri = URI.create("ws://localhost:8080/ws/profiles");
 
-
         socketClient.execute(uri, (WebSocketSession session) -> {
 
-
             Mono<WebSocketMessage> out = Mono.just(session.textMessage("test"));
-
 
             Flux<String> in = session
                     .receive()
                     .map(WebSocketMessage::getPayloadAsText);
-
 
             return session
                     .send(out)
@@ -60,26 +51,13 @@ class WebSocketConfigurationTest {
 
         }).subscribe();
 
-
         Flux
-                .<Sentence>generate(sink -> sink.next(generateRandomProfile()))
+                .<Payment>generate(sink -> sink.next(paymentService.streamTestPayment()))
                 .take(count)
-                .flatMap(this::write)
                 .blockLast();
 
         Thread.sleep(1000);
 
         Assertions.assertThat(counter.get()).isEqualTo(count);
-    }
-
-    private Publisher<Sentence> write(Sentence p) {
-        return
-                this.webClient
-                        .post()
-                        .uri("http://localhost:8080/profiles")
-                        .body(BodyInserters.fromObject(p))
-                        .retrieve()
-                        .bodyToMono(String.class)
-                        .thenReturn(p);
     }
 }

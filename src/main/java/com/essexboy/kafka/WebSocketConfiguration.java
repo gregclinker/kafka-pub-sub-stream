@@ -3,6 +3,8 @@ package com.essexboy.kafka;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.log4j.Log4j2;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.HandlerMapping;
@@ -16,9 +18,10 @@ import java.util.Collections;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-@Log4j2
 @Configuration
 class WebSocketConfiguration {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(WebSocketConfiguration.class);
 
     @Bean
     Executor executor() {
@@ -56,7 +59,7 @@ class WebSocketConfiguration {
                         }
                     })
                     .map(str -> {
-                        log.info("sending " + str);
+                        LOGGER.info("sending " + str);
                         return session.textMessage(str);
                     });
             return session.send(messageFlux);

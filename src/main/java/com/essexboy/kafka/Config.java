@@ -39,8 +39,8 @@ public class Config {
     }
 
     @Bean
-    public Listener listener() {
-        return new Listener(applicationEventPublisher);
+    public PaymentListener listener() {
+        return new PaymentListener(applicationEventPublisher);
     }
 
     @Bean

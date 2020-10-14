@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class KafkaProdSubApplicationTests {
 
     @Autowired
-    private Listener listener;
+    private PaymentListener paymentListener;
 
     @Autowired
     private KafkaTemplate<Integer, Payment> template;
@@ -26,12 +26,12 @@ class KafkaProdSubApplicationTests {
     public void testSimple() throws Exception {
         template.send("payments", new Random().nextInt(), new PaymentFactory().makePayment());
         template.flush();
-        assertTrue(listener.latch1.await(10, TimeUnit.SECONDS));
+        assertTrue(paymentListener.latch1.await(10, TimeUnit.SECONDS));
     }
 
     @Test
     public void paymentService() throws Exception {
         paymentService.streamTestPayment();
-        assertTrue(listener.latch1.await(10, TimeUnit.SECONDS));
+        assertTrue(paymentListener.latch1.await(10, TimeUnit.SECONDS));
     }
 }

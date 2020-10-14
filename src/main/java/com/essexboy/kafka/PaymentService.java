@@ -12,7 +12,7 @@ public class PaymentService {
     private static final Logger LOGGER = LoggerFactory.getLogger(PaymentService.class);
 
     @Autowired
-    private Listener listener;
+    private PaymentListener paymentListener;
 
     @Autowired
     private KafkaTemplate<Integer, Payment> template;

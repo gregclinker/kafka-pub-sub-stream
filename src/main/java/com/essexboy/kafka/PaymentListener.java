@@ -7,13 +7,14 @@ import org.springframework.kafka.annotation.KafkaListener;
 
 import java.util.concurrent.CountDownLatch;
 
-public class Listener {
+public class PaymentListener {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Listener.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(PaymentListener.class);
+
     public final CountDownLatch latch1 = new CountDownLatch(1);
     private final ApplicationEventPublisher applicationEventPublisher;
 
-    Listener(ApplicationEventPublisher applicationEventPublisher) {
+    PaymentListener(ApplicationEventPublisher applicationEventPublisher) {
         this.applicationEventPublisher = applicationEventPublisher;
     }
 

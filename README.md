@@ -22,3 +22,11 @@ A quick way to get a complete Kafka & Schema Registry up and running is to [run 
 **Publisher** http://localhost:8080/testPayment convienience method to create a test payment and write to a topic
 
 **Consumer Stream** http://localhost:8080/ws.html will consume events as a stream
+
+mvn package -DskipTests com.google.cloud.tools:jib-maven-plugin:build -Dimage=registry.hub.docker.com/gregclinker/api-simulator:2.0
+
+**To Build a Docker Image and Deploy to GCP**
+```
+kubectl create deployment api-simulator --image=registry.hub.docker.com/gregclinker/kafka-pub-sub-stream:0.1
+kubectl create service loadbalancer kafka-pub-sub-stream --tcp=8080:8080
+```

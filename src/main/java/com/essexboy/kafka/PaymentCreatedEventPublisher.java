@@ -14,8 +14,7 @@ import java.util.function.Consumer;
 class PaymentCreatedEventPublisher implements ApplicationListener<PaymentCreatedEvent>, Consumer<FluxSink<PaymentCreatedEvent>> {
 
     private final Executor executor;
-    private final BlockingQueue<PaymentCreatedEvent> queue =
-            new LinkedBlockingQueue<>();
+    private final BlockingQueue<PaymentCreatedEvent> queue = new LinkedBlockingQueue<>();
 
     PaymentCreatedEventPublisher(Executor executor) {
         this.executor = executor;

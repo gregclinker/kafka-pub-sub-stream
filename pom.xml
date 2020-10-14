@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.essexboy</groupId>
-    <artifactId>kafka-prod-sub</artifactId>
+    <artifactId>kafka-pub-sub-stream</artifactId>
     <version>0.1</version>
-    <name>kafka-prod-sub</name>
-    <description>Demo project for Kafka Producer and Consumer</description>
+    <name>kafka-pub-sub-stream</name>
+    <description>Demo project for Kafka Producer and Stream Consumer</description>
 
     <properties>
         <java.version>1.8</java.version>

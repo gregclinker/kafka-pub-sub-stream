@@ -9,8 +9,9 @@ mvn clean installl
 
 **To Run**
 ```shell script
-java -jar target/kafka-prod-sub-0.1.jar
+java -jar target/kafka-pub-sub-stream-0.1.jar
 ```
+http://localhost:8080/actuator/health To check the app is up.
 
 Default config for Kafka is set in the Spring Boot application.properties
 

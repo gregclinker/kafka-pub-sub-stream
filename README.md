@@ -1,4 +1,4 @@
-# api-simulator
+# kafka-pub-sub-stream
 
 Spring Boot/Web Flux/Kafka application that drops a payment on a Kafka event and consumes it in a reactive stream..
 

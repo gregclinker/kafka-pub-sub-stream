@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-export VALUES_FILE=/home/greg/work/k8s-kafka-example/helm/providers/my-values.yaml
+export VALUES_FILE=/home/greg/work/kafka-pub-sub-stream/helm/providers/my-values.yaml
 #
 helm upgrade --install   operator   ./confluent-operator   --values $VALUES_FILE   --set operator.enabled=true
 while ! kubectl get pods | grep operator | grep Running; do echo "sleeping"; sleep 5; done

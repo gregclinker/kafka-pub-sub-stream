@@ -22,6 +22,7 @@ public class PaymentService {
     public Payment streamTestPayment() {
         try {
             final Payment payment = new PaymentFactory().makePayment();
+            LOGGER.debug("sending payment " + payment + " using template " + template.toString());
             template.send("payments", ++id, payment);
             template.flush();
             return payment;

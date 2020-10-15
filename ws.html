@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Payment notification client
+    </title>
+</head>
+<body>
+<script>
+    var socket = new WebSocket('ws://35.184.80.101:8080/ws/payments');
+    socket.addEventListener('message', function (event) {
+      document.getElementById("serverData").innerHTML = document.getElementById("serverData").innerHTML + "<br/>" + event.data;
+    });
+</script>
+<div id="serverData">hello greg</div>
+</body>
+</html>
+

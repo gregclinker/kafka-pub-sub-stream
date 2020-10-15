@@ -20,6 +20,12 @@ kafka.bootstrapServers=localhost:9092
 ```
 A quick way to get a complete Kafka & Schema Registry up and running is to [run Confluent locally](https://docs.confluent.io/current/quickstart/ce-quickstart.html)  or [run Confluent with Docker](https://docs.confluent.io/current/quickstart/ce-docker-quickstart.html). This also gives you a nice front end that you can use to see Kafka messages.
 
+To read a topic from a queue
+```
+kafka-console-consumer --bootstrap-server localhost:9092 --topic payments --from-beginning
+```
+
+
 **Publisher** http://localhost:8080/testPayment convienience method to create a test payment and write to a topic
 
 **Consumer Stream** http://localhost:8080/ws.html will consume events as a stream

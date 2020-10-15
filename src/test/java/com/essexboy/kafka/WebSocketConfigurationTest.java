@@ -28,7 +28,7 @@ class WebSocketConfigurationTest {
 
         int count = 10;
         AtomicLong counter = new AtomicLong();
-        URI uri = URI.create("ws://localhost:8080/ws/profiles");
+        URI uri = URI.create("ws://localhost:8080/ws/payments");
 
         socketClient.execute(uri, (WebSocketSession session) -> {
 
@@ -53,6 +53,6 @@ class WebSocketConfigurationTest {
 
         Thread.sleep(1000);
 
-        Assertions.assertThat(counter.get()).isEqualTo(count);
+        Assertions.assertThat(counter.get()).isGreaterThanOrEqualTo(count);
     }
 }

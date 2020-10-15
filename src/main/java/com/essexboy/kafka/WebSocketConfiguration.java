@@ -32,7 +32,7 @@ class WebSocketConfiguration {
     HandlerMapping handlerMapping(WebSocketHandler wsh) {
         return new SimpleUrlHandlerMapping() {
             {
-                setUrlMap(Collections.singletonMap("/ws/profiles", wsh));
+                setUrlMap(Collections.singletonMap("/ws/payments", wsh));
                 setOrder(10);
             }
         };

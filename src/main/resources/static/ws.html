@@ -2,22 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Profile notification client
+    <title>Payment notification client
     </title>
 </head>
 <body>
 <script>
-    
-    var socket = new WebSocket('ws://localhost:8080/ws/profiles');
-    
+    var socket = new WebSocket('ws://localhost:8080/ws/payments');
     socket.addEventListener('message', function (event) {
-      //window.alert('message from server: ' + event.data);
       document.getElementById("serverData").innerHTML = document.getElementById("serverData").innerHTML + "<br/>" + event.data;
     });
-
-
-
-
 </script>
 <div id="serverData">hello greg</div>
 </body>
